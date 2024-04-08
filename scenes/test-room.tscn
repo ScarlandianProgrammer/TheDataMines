@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjwes7rwq06bn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7fw7p"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_eudmj"]
+size = Vector2(1100, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uny4v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljjae"]
+size = Vector2(1100, 50)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_7fw7p")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_eudmj")
+texture = SubResource("PlaceholderTexture2D_uny4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ljjae")
+one_way_collision = true
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
