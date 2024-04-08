@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl1cdsfj13usc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r0y17"]
+absorbent = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_jpeun"]
+size = Vector2(50, 50)
+
+[sub_resource type="Gradient" id="Gradient_yru6f"]
+offsets = PackedFloat32Array(0, 0.519481, 1)
+colors = PackedColorArray(0.12549, 0.0117647, 0.717647, 1, 0, 0.843137, 0.00784314, 1, 1, 0.0196078, 0.247059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vfx1j"]
+gradient = SubResource("Gradient_yru6f")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k48t5"]
+size = Vector2(50, 50)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_r0y17")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_jpeun")
+texture = SubResource("GradientTexture2D_vfx1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k48t5")

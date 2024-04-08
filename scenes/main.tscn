@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c18q8m4xpb6rt"]
+
+[ext_resource type="PackedScene" uid="uid://3p4dp6lu2mdp" path="res://scenes/player.tscn" id="1_ll74j"]
+[ext_resource type="PackedScene" uid="uid://cjwes7rwq06bn" path="res://scenes/test-room.tscn" id="2_54lcf"]
+[ext_resource type="PackedScene" uid="uid://dl1cdsfj13usc" path="res://scenes/box.tscn" id="3_5bhjf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cvwbn"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ll74j")]
+position = Vector2(564, 228)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+
+[node name="TestRoom" parent="." instance=ExtResource("2_54lcf")]
+position = Vector2(578, 597)
+physics_material_override = SubResource("PhysicsMaterial_cvwbn")
+
+[node name="Box" parent="." instance=ExtResource("3_5bhjf")]
+position = Vector2(796, 547)
+
+[node name="Platform" parent="." instance=ExtResource("3_5bhjf")]
+position = Vector2(392, 499)
