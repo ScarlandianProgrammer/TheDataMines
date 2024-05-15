@@ -3,8 +3,11 @@ extends CharacterBody2D
 const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var JumpHeight = 75.0
+var TimeToJumpPeak = .35
+
+var Gravity = (2 * JumpHeight)/pow(TimeToJumpPeak,2)
+var JumpVelocity = Gravity * TimeToJumpPeak
 var Hold_Y_Data = Vector2.ZERO
 
 @onready var _animated_sprite = $AnimatedSprite2D
@@ -25,11 +28,11 @@ func _process(_delta):
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += Gravity * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		Jump()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -40,3 +43,11 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func Jump():
+	velocity.y = -JumpVelocity
+
+## 			  2 * JumpHeight
+## Gravity = ----------------
+## 			 TimeToPeakJump^2
+## JumpVelocity = Gravity * TimeToJumpPeak

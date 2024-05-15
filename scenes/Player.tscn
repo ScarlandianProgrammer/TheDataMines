@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://3p4dp6lu2mdp"]
+[gd_scene load_steps=25 format=3 uid="uid://3p4dp6lu2mdp"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_evsyt"]
 [ext_resource type="Texture2D" uid="uid://cegdgfcemrmra" path="res://assets/adventurer-Sheet.png" id="2_0acj8"]
 [ext_resource type="Texture2D" uid="uid://y2grktfg56ia" path="res://assets/adventurer-Sheet-Reverse.png" id="3_vy5fy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sy7v"]
-size = Vector2(30, 34)
+size = Vector2(26, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iietm"]
 atlas = ExtResource("2_0acj8")
@@ -156,7 +156,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p10yo"]
+radius = 15.0
+height = 32.0
+
+[node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_evsyt")
 
@@ -167,4 +171,14 @@ shape = SubResource("RectangleShape2D_4sy7v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5t6xf")
-animation = &"run_right"
+animation = &"idle"
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_p10yo")
+debug_color = Color(0.988235, 0, 0, 0.466667)
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
